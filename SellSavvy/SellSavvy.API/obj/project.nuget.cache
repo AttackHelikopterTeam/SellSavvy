@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "EiUM8CaXjdS/xF5SRw6RzxZplx1Is2YQH2jt+CmqQjAiGyAQjOoLTrRl6UrSNrGXIfrHJWFy4AlXSTxEo4wI5w==",
+  "dgSpecHash": "yhK08Gy7Bg9Jmm0igz7A2+zmUeauCpEneUfDIj58vHqiOsF+mkEOOMH1ePm797KNcn+NNfeOKvlltQxyjpMtzg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Diablo\\source\\repos\\SellSavvy\\SellSavvy\\SellSavvy.API\\SellSavvy.API.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,11 @@
     "C:\\Users\\Diablo\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "C:\\Users\\Diablo\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "C:\\Users\\Diablo\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
-    "C:\\Users\\Diablo\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+    "C:\\Users\\Diablo\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",
+    "C:\\Users\\Diablo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\Diablo\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\Diablo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\Diablo\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.14\\microsoft.netcore.app.host.win-x64.7.0.14.nupkg.sha512"
   ],
   "logs": []
 }
