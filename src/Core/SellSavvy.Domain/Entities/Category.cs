@@ -1,4 +1,5 @@
-﻿using SellSavvy.Domain.Common;
+﻿using FluentValidation;
+using SellSavvy.Domain.Common;
 
 namespace SellSavvy.Domain.Entities;
 
@@ -10,3 +11,4 @@ public class Category:EntityBase<Guid>
 
 
 }
+

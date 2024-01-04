@@ -6,11 +6,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
     <Compile Remove="Controllers\**" />
     <Content Remove="Controllers\**" />
     <EmbeddedResource Remove="Controllers\**" />
     <None Remove="Controllers\**" />
+    <None Remove="Models\" />
+    <None Remove="Models\ViewModels\" />
+    <None Remove="Models\PostModels\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,10 +32,27 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
 
 	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+	  <PackageReference Include="FluentValidation" Version="11.9.0" />
+	  <PackageReference Include="FluentValidation.WebAPI" Version="8.6.1" />
+	  <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Infrastructure\SellSavvy.Persistence\SellSavvy.Persistence.csproj" />
+    <ProjectReference Include="..\..\Core\SellSavvy.Domain\SellSavvy.Domain.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\SellSavvy.Persistence\SellSavvy.Persistence.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Models\ViewModels\" />
+    <Folder Include="Models\PostModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\CategoryController.cs" />
+  </ItemGroup>
 </Project>
