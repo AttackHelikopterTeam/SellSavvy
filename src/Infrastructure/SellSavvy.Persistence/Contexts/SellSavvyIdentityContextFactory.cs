@@ -16,9 +16,10 @@ namespace SellSavvy.Persistence.Contexts
 
                 var optionsBuilder = new DbContextOptionsBuilder<SellSavvyIdentityContext>();
 
-                var connectionString = ConfigurationsDb.GetString("ConnectionStrings:PostgreSQL");
+            // var connectionString = ConfigurationsDb.GetString("ConnectionStrings:PostgreSQL");
+            var macConnectionString = "Server=91.151.83.102;Port=5432;Database=Anil_Akpinar_Test1.3;User,Id=ahmetkokteam;Password=obXRMG*U6rJ4R0cbHszpgEuFd";
 
-                optionsBuilder.UseNpgsql(connectionString);
+                optionsBuilder.UseNpgsql(macConnectionString);
 
                 return new SellSavvyIdentityContext(optionsBuilder.Options);
             }
