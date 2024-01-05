@@ -17,7 +17,7 @@ namespace SellSavvy.API.Controllers
     public class CategoryController : ControllerBase
     {
         SellSavvyIdentityContext _context;
-        CategoryController(SellSavvyIdentityContext context)
+        public CategoryController(SellSavvyIdentityContext context)
         {
             _context = context;
         }

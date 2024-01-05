@@ -13,7 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<SellSavvyIdentityContext>(options =>
 {
-    options.UseNpgsql(ConfigurationsDb.GetString("ConnectionStrings:PostgreSQL"));
+    //options.UseNpgsql(ConfigurationsDb.GetString("ConnectionStrings:PostgreSQL"));
+    options.UseNpgsql("Server=91.151.83.102;Port=5432;Database=Anil_Akpinar_Test1.3;User,Id=ahmetkokteam;Password=obXRMG*U6rJ4R0cbHszpgEuFd");
 });
 
 builder.Services.AddIdentity<Person,Role>(options =>
