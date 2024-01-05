@@ -16,9 +16,14 @@ builder.Services.AddDbContext<SellSavvyIdentityContext>(options =>
     options.UseNpgsql(ConfigurationsDb.GetString("ConnectionStrings:PostgreSQL"));
 });
 
-builder.Services.AddIdentity<Person, Role>(options =>
+builder.Services.AddIdentity<Person,Role>(options =>
 {
-    options.Password.RequiredLength = 5;
+    options.Password.RequiredLength = 3;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.User.RequireUniqueEmail = true;
 }).AddEntityFrameworkStores<SellSavvyIdentityContext>()
                 .AddDefaultTokenProviders();
 
@@ -44,7 +49,7 @@ builder.Services.AddAuthentication(options =>
 );
 
 
-builder.Services.AddTransient<IAuthService, AuthService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

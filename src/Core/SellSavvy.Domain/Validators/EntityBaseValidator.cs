@@ -13,7 +13,7 @@ namespace SellSavvy.Domain.Validators
             RuleFor(c => c.Id).NotNull();
             RuleFor(c => c.CreatedByUserId).Null();
             RuleFor(c => c.CreatedOn).Null();
-            RuleFor(c => c.ModifiedByUserId).NotNull();
+            RuleFor(c => c.ModifiedByUserId).Null();
             RuleFor(c => c.LastModifiedOn).Null();
             RuleFor(c => c.IsDeleted).Null();
             RuleFor(c => c.DeletedByUserId).Null();

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SellSavvy.API.Models.LoginModels;
 using SellSavvy.API.Service;
 using SellSavvy.Domain.Identity;
 
@@ -16,8 +17,9 @@ namespace SellSavvy.API.Controller
             _authService = authService;
         }
 
+
         [HttpPost("Register")]
-        public async Task<IActionResult> RegisterUser(Person user)
+        public async Task<IActionResult> RegisterUser(LoginUser user)
         {
             if (await _authService.RegisterUser(user))
             {
@@ -27,7 +29,7 @@ namespace SellSavvy.API.Controller
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(Person user)
+        public async Task<IActionResult> Login(LoginUser user)
         {
             if (!ModelState.IsValid)
             {
