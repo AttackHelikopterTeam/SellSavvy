@@ -4,8 +4,9 @@ namespace SellSavvy.Persistence.Configurations
 {
     public static class ConfigurationsDb
     {
-        public static string GetString(string key)
+        /*public static string GetString(string key)
         {
+
             ConfigurationManager configurationManager = new();
 
             string path = $"{Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName}\\Infrastructure\\SellSavvy.Persistence\\Configurations";
@@ -15,7 +16,7 @@ namespace SellSavvy.Persistence.Configurations
             configurationManager.AddJsonFile("PrivateInformations.json"); 
 
             return configurationManager.GetSection(key).Value;
-        }
+        }*/
 
     }
 }
