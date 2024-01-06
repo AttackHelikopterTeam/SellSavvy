@@ -22,4 +22,12 @@
     <ProjectReference Include="..\..\Core\SellSavvy.Application\SellSavvy.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Repositories\" />
+    <None Remove="Repositories\ProductRepository\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+    <Folder Include="Repositories\ProductRepository\" />
+  </ItemGroup>
 </Project>

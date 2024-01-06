@@ -6,6 +6,8 @@ using SellSavvy.API.Service;
 using SellSavvy.Domain.Identity;
 using SellSavvy.Persistence.Configurations;
 using SellSavvy.Persistence.Contexts;
+using SellSavvy.Application.Repositories.Product;
+using SellSavvy.Persistence.Repositories.ProductRepository;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -64,6 +66,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+builder.Services.AddDbContext<SellSavvyIdentityContext>();
+
 
 app.UseHttpsRedirection();
 

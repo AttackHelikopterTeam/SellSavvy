@@ -10,4 +10,15 @@
     <ProjectReference Include="..\SellSavvy.Domain\SellSavvy.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Repositories\" />
+    <None Remove="Repositories\Product\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+    <Folder Include="Repositories\Product\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
+  </ItemGroup>
 </Project>
