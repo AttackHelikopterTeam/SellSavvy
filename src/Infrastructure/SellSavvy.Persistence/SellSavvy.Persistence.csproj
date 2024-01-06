@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\SellSavvy.Application\SellSavvy.Application.csproj" />
+    <ProjectReference Include="..\..\Core\SellSavvy.Domain\SellSavvy.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
