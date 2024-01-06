@@ -10,4 +10,36 @@
     <ProjectReference Include="..\SellSavvy.Domain\SellSavvy.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Repositories\" />
+    <None Remove="Repositories\Product\" />
+    <None Remove="Features\" />
+    <None Remove="Features\Commands\" />
+    <None Remove="Features\Queries\" />
+    <None Remove="Features\Commands\Product\" />
+    <None Remove="Features\Commands\Product\AddProduct\" />
+    <None Remove="Features\Commands\Product\UpdateProduct\" />
+    <None Remove="Features\Commands\Product\RemoveProduct\" />
+    <None Remove="Features\Queries\Product\" />
+    <None Remove="Features\Queries\Product\GetAllProduct\" />
+    <None Remove="Features\Queries\Product\GetByIdProduct\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+    <Folder Include="Repositories\Product\" />
+    <Folder Include="Features\" />
+    <Folder Include="Features\Commands\" />
+    <Folder Include="Features\Queries\" />
+    <Folder Include="Features\Commands\Product\" />
+    <Folder Include="Features\Commands\Product\AddProduct\" />
+    <Folder Include="Features\Commands\Product\UpdateProduct\" />
+    <Folder Include="Features\Commands\Product\RemoveProduct\" />
+    <Folder Include="Features\Queries\Product\" />
+    <Folder Include="Features\Queries\Product\GetAllProduct\" />
+    <Folder Include="Features\Queries\Product\GetByIdProduct\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
+  </ItemGroup>
 </Project>

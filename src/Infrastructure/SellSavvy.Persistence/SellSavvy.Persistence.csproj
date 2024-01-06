@@ -20,6 +20,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\SellSavvy.Application\SellSavvy.Application.csproj" />
+    <ProjectReference Include="..\..\Core\SellSavvy.Domain\SellSavvy.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Repositories\" />
+    <None Remove="Repositories\ProductRepository\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+    <Folder Include="Repositories\ProductRepository\" />
+  </ItemGroup>
 </Project>
