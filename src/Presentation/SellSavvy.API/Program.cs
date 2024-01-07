@@ -64,8 +64,11 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 //Fluent Validation Injection
-builder.Services.AddScoped<IValidator<CategoryPostModel>, CategoryPostValidator>();
-builder.Services.AddScoped<IValidator<EntityBase<Guid>>, EntityBaseValidator>();
+builder.Services.AddControllersWithViews()
+    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CategoryPostValidator>()
+                                   .RegisterValidatorsFromAssemblyContaining<EntityBaseValidator>()
+                                   );
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
