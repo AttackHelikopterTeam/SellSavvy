@@ -36,7 +36,7 @@ namespace SellSavvy.API.Controllers
             return Ok(product);
         }
 
-        [HttpPost]
+        [HttpPost("AddProduct")]
         public IActionResult AddProduct([FromBody] Product newProduct)
         {
             if (!ModelState.IsValid)
@@ -50,7 +50,7 @@ namespace SellSavvy.API.Controllers
             return CreatedAtRoute("GetProductById", new { id = newProduct.Id }, newProduct);
         }
 
-        [HttpPut]
+        [HttpPut("UpdateProduct")]
         public IActionResult UpdateProduct([FromBody] Product updatedProduct)
         {
             Product existingProduct = _context.Products.FirstOrDefault(p => p.Id == updatedProduct.Id);

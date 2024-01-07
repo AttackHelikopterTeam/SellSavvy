@@ -16,6 +16,9 @@ namespace SellSavvy.Persistence
             _context = context;
         }
 
+        protected DbSet<T> Table => _context.Set<T>();
+        protected SellSavvyIdentityContext Context => _context;
+
         public async Task AddAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);

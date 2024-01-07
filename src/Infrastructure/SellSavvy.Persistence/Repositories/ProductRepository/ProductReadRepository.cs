@@ -3,9 +3,10 @@ namespace SellSavvy.Persistence.Repositories.ProductRepository
 {
 	public class ProductReadRepository
 	{
-		public ProductReadRepository()
-		{
-		}
-	}
+        public async Task<Domain.Entities.Product> GetById(Guid id, bool tracking)
+        {
+            return new Domain.Entities.Product();
+        }
+    }
 }
 
