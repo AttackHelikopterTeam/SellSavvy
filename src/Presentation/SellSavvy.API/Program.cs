@@ -9,8 +9,17 @@ using SellSavvy.Persistence.Contexts;
 using SellSavvy.Application.Repositories.Product;
 using SellSavvy.Persistence.Repositories.ProductRepository;
 using System.Text;
+using FluentValidation;
+using SellSavvy.Domain.Validators;
+using SellSavvy.Domain.Entities;
+using SellSavvy.Domain.Common;
+using SellSavvy.API.Models.PostModels;
+using SellSavvy.API.Validators;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Add fluent validation
 
 // Add services to the container.
 builder.Services.AddDbContext<SellSavvyIdentityContext>(options =>
@@ -54,6 +63,10 @@ builder.Services.AddAuthentication(options =>
 
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+//Fluent Validation Injection
+builder.Services.AddScoped<IValidator<CategoryPostModel>, CategoryPostValidator>();
+builder.Services.AddScoped<IValidator<EntityBase<Guid>>, EntityBaseValidator>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

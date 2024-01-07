@@ -10,29 +10,41 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using SellSavvy.API.Models.PostModels;
 
+using Microsoft.IdentityModel.Tokens;
+using FluentValidation;
+using SellSavvy.Domain.Identity;
+using System.ComponentModel.DataAnnotations;
+using FluentValidation.AspNetCore;
 
 namespace SellSavvy.API.Controllers
 {
     [Route("api/[controller]")]
     public class CategoryController : ControllerBase
     {
+        
+        private IValidator<CategoryPostModel> _validator;
         SellSavvyIdentityContext _context;
-        public CategoryController(SellSavvyIdentityContext context)
+        public CategoryController(IValidator<CategoryPostModel> validator, SellSavvyIdentityContext context)
         {
+            _validator = validator;
             _context = context;
         }
 
 
         [HttpGet("All")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<List<Category>>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<CategoryPostModel>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Get()
         {
             
-            List<Category> category = _context.Categories.Where(x => x.IsDeleted == false).ToList();
-           
+            List<CategoryPostModel> category = _context.Categories.Where(x => x.IsDeleted == false).Select(x => new CategoryPostModel
+            {
+                Id = x.Id,
+                Name = x.Name
+            }).ToList();
+            
             //LogToDatabase("called by id");
             return Ok(category);
 
@@ -64,12 +76,17 @@ namespace SellSavvy.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Add([FromBody] CategoryPostModel model)
+        public async Task<IActionResult> Add([FromBody] CategoryPostModel model,CancellationToken token) 
         {
+
+            var result = await _validator.ValidateAsync(model,token);
+
+
 
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+               
+                return BadRequest(result.Errors);
             }
             Category category = new()
             {
@@ -77,11 +94,12 @@ namespace SellSavvy.API.Controllers
                 Name = model.Name,
                 //CreatedByUserId = which admin
                 CreatedOn = DateTimeOffset.UtcNow,
+                ModifiedByUserId = "84c432a0-e376-436d-8122-15a3106c363f"
 
 
             };
 
-            _context.Categories.Add(category);
+            await _context.Categories.AddAsync(category,token);
             _context.SaveChanges();
             //LogToDatabase("added by id");
             return CreatedAtRoute("GetById", new { id = model.Id }, model);

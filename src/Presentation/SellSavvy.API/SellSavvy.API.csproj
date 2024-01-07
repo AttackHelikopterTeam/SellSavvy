@@ -14,8 +14,8 @@
     <EmbeddedResource Remove="Controllers\**" />
     <None Remove="Controllers\**" />
     <None Remove="Models\" />
-    <None Remove="Models\ViewModels\" />
-    <None Remove="Models\PostModels\" />
+    <None Remove="Models\Validators\" />
+    <None Remove="Models\PostViewModels\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,8 +47,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\ViewModels\" />
-    <Folder Include="Models\PostModels\" />
+    <Folder Include="Models\Validators\" />
+    <Folder Include="Models\PostViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AuthController.cs" />

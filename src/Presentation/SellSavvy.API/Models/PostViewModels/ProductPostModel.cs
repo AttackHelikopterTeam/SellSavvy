@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SellSavvy.Domain.Enum;
+
+using System;
 using SellSavvy.Domain.Enum;
 
 namespace SellSavvy.Application.Models.PostModels
