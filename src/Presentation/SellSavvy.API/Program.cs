@@ -16,7 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SellSavvyIdentityContext>(options =>
 {
     //options.UseNpgsql(ConfigurationsDb.GetString("ConnectionStrings:PostgreSQL"));
-    options.UseNpgsql("Server=91.151.83.102;Port=5432;Database=Anil_Akpinar_Test1.3;User,Id=ahmetkokteam;Password=obXRMG*U6rJ4R0cbHszpgEuFd");
+    options.UseNpgsql("Server=91.151.83.102;Port=5432;Database=Anil_Akpinar_Test1.3;User Id=hakanamaratliteam;Password=oyi6IkdAQ*pL7qutMo4Q4FgpL;");
+    //"Server=91.151.83.102;Port=5432;Database=Anil_Akpinar_Test1.3;User,Id=ahmetkokteam;Password=obXRMG*U6rJ4R0cbHszpgEuFd"
 });
 
 builder.Services.AddIdentity<Person,Role>(options =>
@@ -67,7 +68,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-builder.Services.AddDbContext<SellSavvyIdentityContext>();
+//builder.Services.AddDbContext<SellSavvyIdentityContext>();
 
 
 app.UseHttpsRedirection();
