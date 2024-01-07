@@ -100,7 +100,7 @@ namespace SellSavvy.API.Controllers
             };
 
             await _context.Categories.AddAsync(category,token);
-            _context.SaveChanges();
+            _context.SaveChangesAsync(token);
             //LogToDatabase("added by id");
             return CreatedAtRoute("GetById", new { id = model.Id }, model);
 
@@ -111,14 +111,20 @@ namespace SellSavvy.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Update([FromBody] CategoryPostModel updatedCategory)
+        public async Task<IActionResult> Update([FromBody] CategoryPostModel updatedCategory,CancellationToken token)
         {
-           
+            
+            var result = await _validator.ValidateAsync(updatedCategory, token);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(result.Errors);
+            }
+
             Category existingBrand = _context.Categories.FirstOrDefault(s => s.Id == updatedCategory.Id);
 
             existingBrand.Name = updatedCategory.Name;
            
-            _context.SaveChanges();
+            _context.SaveChangesAsync(token);
             //LogToDatabase("updated by id");
             return NoContent();
 
