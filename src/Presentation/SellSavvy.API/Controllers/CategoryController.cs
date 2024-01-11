@@ -90,12 +90,12 @@ namespace SellSavvy.API.Controllers
             }
             Category category = new()
             {
-                Id = model.Id,
+                   Id = model.Id,
                 Name = model.Name,
                 //CreatedByUserId = which admin
                 CreatedOn = DateTimeOffset.UtcNow,
-                ModifiedByUserId = "84c432a0-e376-436d-8122-15a3106c363f"
-
+                ModifiedByUserId = "84c432a0-e376-436d-8122-15a3106c363f",
+                IsDeleted = false
 
             };
 
