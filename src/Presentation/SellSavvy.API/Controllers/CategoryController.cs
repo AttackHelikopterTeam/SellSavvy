@@ -76,22 +76,22 @@ namespace SellSavvy.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Add([FromBody] CategoryPostModel model,CancellationToken token) 
+        public async Task<IActionResult> Add([FromBody] string model) 
         {
 
-            var result = await _validator.ValidateAsync(model,token);
+            //var result = await _validator.ValidateAsync(model,token);
 
 
 
             if (!ModelState.IsValid)
             {
                
-                return BadRequest(result.Errors);
+             //   return BadRequest(result.Errors);
             }
             Category category = new()
             {
-                   Id = model.Id,
-                Name = model.Name,
+                   Id = Guid.NewGuid(),
+                Name = model,
                 //CreatedByUserId = which admin
                 CreatedOn = DateTimeOffset.UtcNow,
                 ModifiedByUserId = "84c432a0-e376-436d-8122-15a3106c363f",
@@ -99,22 +99,26 @@ namespace SellSavvy.API.Controllers
 
             };
 
-            await _context.Categories.AddAsync(category,token);
-            _context.SaveChangesAsync(token);
+             _context.Categories.Add(category);
+            _context.SaveChanges();
             //LogToDatabase("added by id");
-            return CreatedAtRoute("GetById", new { id = model.Id }, model);
+            Category existingBrand =  _context.Categories.FirstOrDefault(s => s.Id == category.Id);
+            return Ok(existingBrand);
 
         }
+
+      
+
 
         [HttpPut("Update")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Update([FromBody] CategoryPostModel updatedCategory,CancellationToken token)
+        public async Task<IActionResult> Update([FromBody] CategoryPostModel updatedCategory)
         {
-            
-            var result = await _validator.ValidateAsync(updatedCategory, token);
+
+            var result =  _validator.Validate(updatedCategory);
             if (!ModelState.IsValid)
             {
                 return BadRequest(result.Errors);
@@ -123,8 +127,8 @@ namespace SellSavvy.API.Controllers
             Category existingBrand = _context.Categories.FirstOrDefault(s => s.Id == updatedCategory.Id);
 
             existingBrand.Name = updatedCategory.Name;
-           
-            _context.SaveChangesAsync(token);
+
+            _context.SaveChangesAsync();
             //LogToDatabase("updated by id");
             return NoContent();
 

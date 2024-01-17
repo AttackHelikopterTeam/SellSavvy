@@ -46,10 +46,10 @@ namespace SellSavvy.API.Controllers
         }
 
         [HttpPost("AddProduct")]
-        public async Task<IActionResult> AddProduct([FromBody] ProductPostModel newProduct,CancellationToken token)
+        public async Task<IActionResult> AddProduct([FromBody] ProductPostModel newProduct)
         {
 
-            var result = await _validator.ValidateAsync(newProduct, token);
+            var result =  _validator.Validate(newProduct);
 
 
             if (!ModelState.IsValid)
@@ -68,17 +68,17 @@ namespace SellSavvy.API.Controllers
                     SellerId = newProduct.SellerId
                 
         };
-            _context.Products.AddAsync(product, token);
-            _context.SaveChangesAsync(token);
+            _context.Products.Add(product);
+            _context.SaveChanges();
 
             return CreatedAtRoute("GetProductById", new { id = product.Id }, newProduct);
         }
 
         [HttpPut("UpdateProduct")]
-        public async Task<IActionResult> UpdateProduct([FromBody] ProductPostModel updatedProduct,CancellationToken token)
+        public async Task<IActionResult> UpdateProduct([FromBody] ProductPostModel updatedProduct)
         {
             
-            var result = await _validator.ValidateAsync(updatedProduct, token);
+            var result =  _validator.Validate(updatedProduct);
          
             if (!ModelState.IsValid)
             {
@@ -104,7 +104,7 @@ namespace SellSavvy.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(Guid id,CancellationToken token)
+        public async Task<IActionResult> DeleteProduct(Guid id)
         {
             Product deletingProduct = _context.Products.FirstOrDefault(p => p.Id == id);
             if (deletingProduct == null)
@@ -113,7 +113,7 @@ namespace SellSavvy.API.Controllers
             }
 
             _context.Products.Remove(deletingProduct);
-            _context.SaveChangesAsync(token);
+            _context.SaveChanges();
 
             return NoContent();
 
