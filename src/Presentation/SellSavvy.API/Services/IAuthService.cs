@@ -1,7 +1,7 @@
 ﻿using SellSavvy.API.Models.LoginModels;
 using SellSavvy.Domain.Identity;
 
-namespace SellSavvy.API.Service
+namespace SellSavvy.API.Service ///namespace service olarak gorunuyor services olarak gorunmesi gerekmiyor mu
 {
         public interface IAuthService
         {
@@ -11,3 +11,4 @@ namespace SellSavvy.API.Service
         }
 
     }
+ 

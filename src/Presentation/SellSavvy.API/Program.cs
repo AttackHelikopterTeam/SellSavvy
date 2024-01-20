@@ -9,6 +9,7 @@ using SellSavvy.Persistence.Contexts;
 using SellSavvy.Application.Repositories.Product;
 using SellSavvy.Persistence.Repositories.ProductRepository;
 using System.Text;
+using SellSavvy.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,6 +59,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSingleton<RegisterService>(new RegisterService());
+builder.Services.AddSingleton<RequestCountService>(new RequestCountService());
+
 
 var app = builder.Build();
 
