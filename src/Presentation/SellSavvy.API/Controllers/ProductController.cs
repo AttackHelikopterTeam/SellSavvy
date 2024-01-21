@@ -7,6 +7,7 @@ using SellSavvy.Persistence.Contexts;
 using System;
 using FluentValidation;
 using SellSavvy.Application.Models.PostModels;
+using SellSavvy.API.Services;
 
 namespace SellSavvy.API.Controllers
 {
@@ -16,11 +17,13 @@ namespace SellSavvy.API.Controllers
         private IValidator<ProductPostModel> _validator;
 
         private readonly SellSavvyIdentityContext _context;
+        private readonly RequestCountService _requestCountService;
 
-        public ProductController(SellSavvyIdentityContext context, IValidator<ProductPostModel> validator)
+        public ProductController(SellSavvyIdentityContext context, IValidator<ProductPostModel> validator, RequestCountService requestCountService)
         {
             _context = context;
             _validator = validator;
+            _requestCountService = requestCountService;
         }
 
         [HttpGet]
@@ -39,6 +42,7 @@ namespace SellSavvy.API.Controllers
             {
                 return NotFound();
             }
+            _requestCountService.RequestCount++; //requestCount
 
             return Ok(product);
         }
@@ -68,6 +72,8 @@ namespace SellSavvy.API.Controllers
         };
             _context.Products.Add(product);
             _context.SaveChanges();
+            _requestCountService.RequestCount++; //requestCount
+
 
             return CreatedAtRoute("GetProductById", new { id = product.Id }, newProduct);
         }
@@ -97,6 +103,8 @@ namespace SellSavvy.API.Controllers
             existingProduct.SellerId = updatedProduct.SellerId;
 
             _context.SaveChanges();
+            _requestCountService.RequestCount++; //requestCount
+
 
             return NoContent();
         }
@@ -112,6 +120,8 @@ namespace SellSavvy.API.Controllers
 
             _context.Products.Remove(deletingProduct);
             _context.SaveChanges();
+            _requestCountService.RequestCount++; //requestCount
+
 
             return NoContent();
 

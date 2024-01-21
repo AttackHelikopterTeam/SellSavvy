@@ -15,6 +15,7 @@ using FluentValidation;
 using SellSavvy.Domain.Identity;
 using System.ComponentModel.DataAnnotations;
 using FluentValidation.AspNetCore;
+using SellSavvy.API.Services;
 
 namespace SellSavvy.API.Controllers
 {
@@ -24,10 +25,12 @@ namespace SellSavvy.API.Controllers
         
         private IValidator<CategoryPostModel> _validator;
         SellSavvyIdentityContext _context;
-        public CategoryController(IValidator<CategoryPostModel> validator, SellSavvyIdentityContext context)
+        private RequestCountService _requestCountService;
+        public CategoryController(IValidator<CategoryPostModel> validator, SellSavvyIdentityContext context, RequestCountService requestCountService)
         {
             _validator = validator;
             _context = context;
+            _requestCountService = requestCountService;
         }
 
 
@@ -44,8 +47,10 @@ namespace SellSavvy.API.Controllers
                 Id = x.Id,
                 Name = x.Name
             }).ToList();
-            
+
             //LogToDatabase("called by id");
+            _requestCountService.RequestCount++; //requestCount
+
             return Ok(category);
 
         }
@@ -65,7 +70,8 @@ namespace SellSavvy.API.Controllers
 
 
             Category category = _context.Categories.FirstOrDefault(x => x.Id == id);
-            
+            _requestCountService.RequestCount++; //requestCount
+
             return Ok(category);
 
 
@@ -103,6 +109,8 @@ namespace SellSavvy.API.Controllers
             _context.SaveChanges();
             //LogToDatabase("added by id");
             Category existingBrand =  _context.Categories.FirstOrDefault(s => s.Id == category.Id);
+            _requestCountService.RequestCount++; //requestCount
+
             return Ok(existingBrand);
 
         }
@@ -130,6 +138,8 @@ namespace SellSavvy.API.Controllers
 
             _context.SaveChangesAsync();
             //LogToDatabase("updated by id");
+            _requestCountService.RequestCount++; //requestCount
+
             return NoContent();
 
         }
