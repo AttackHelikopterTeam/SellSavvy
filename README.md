@@ -77,3 +77,5 @@ This project is an API developed using Clean Architecture, incorporating various
 
 ## Challenges Faced
 During the development process, we encountered challenges in optimizing database queries for performance. We addressed this by implementing tracing mechanisms and pagination, resulting in improved query efficiency.
+
+500 Intern Server Error: During the development process, we encountered a cancellation token problem, which was related to async orders. We couldn't figure out why it was causing an issue, so we decided to remove async completely. After doing so, it worked perfectly
