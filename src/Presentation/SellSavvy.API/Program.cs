@@ -4,18 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SellSavvy.API.Service;
 using SellSavvy.Domain.Identity;
-using SellSavvy.Persistence.Configurations;
 using SellSavvy.Persistence.Contexts;
-using SellSavvy.Application.Repositories.Product;
-using SellSavvy.Persistence.Repositories.ProductRepository;
 using System.Text;
-using FluentValidation;
 using SellSavvy.Domain.Validators;
-using SellSavvy.Domain.Entities;
-using SellSavvy.Domain.Common;
-using SellSavvy.API.Models.PostModels;
 using SellSavvy.API.Validators;
 using FluentValidation.AspNetCore;
+using SellSavvy.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

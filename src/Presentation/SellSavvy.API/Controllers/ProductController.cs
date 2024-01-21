@@ -6,9 +6,7 @@ using SellSavvy.Domain.Entities;
 using SellSavvy.Persistence.Contexts;
 using System;
 using FluentValidation;
-using SellSavvy.API.Models.PostModels;
 using SellSavvy.Application.Models.PostModels;
-using Newtonsoft.Json.Linq;
 
 namespace SellSavvy.API.Controllers
 {
