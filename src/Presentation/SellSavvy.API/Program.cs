@@ -34,6 +34,7 @@ builder.Services.AddIdentity<Person,Role>(options =>
 }).AddEntityFrameworkStores<SellSavvyIdentityContext>()
                 .AddDefaultTokenProviders();
 
+//JWT Bearer start
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -54,6 +55,7 @@ builder.Services.AddAuthentication(options =>
     };
 }
 );
+
 
 
 builder.Services.AddScoped<IAuthService, AuthService>();
