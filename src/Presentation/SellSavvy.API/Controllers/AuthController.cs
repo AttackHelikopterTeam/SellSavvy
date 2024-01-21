@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SellSavvy.API.Models.LoginModels;
 using SellSavvy.API.Services;
 
+using SellSavvy.API.Models.PostModels;
 using SellSavvy.API.Service;
 
 using SellSavvy.Domain.Identity;
@@ -13,6 +15,7 @@ namespace SellSavvy.API.Controller
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private IValidator<CategoryPostModel> _validator;
         private readonly IAuthService _authService;
         private RegisterService _registerService;  //registercount
         private RequestCountService _requestCountService; //requestCount

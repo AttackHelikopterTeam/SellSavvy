@@ -5,21 +5,30 @@ using Microsoft.AspNetCore.Mvc;
 using SellSavvy.Domain.Entities;
 using SellSavvy.Persistence.Contexts;
 using System;
+using FluentValidation;
+using SellSavvy.API.Models.PostModels;
+using SellSavvy.Application.Models.PostModels;
+using Newtonsoft.Json.Linq;
+
 namespace SellSavvy.API.Controllers
 {
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
+        private IValidator<ProductPostModel> _validator;
+
         private readonly SellSavvyIdentityContext _context;
 
-        public ProductController(SellSavvyIdentityContext context)
+        public ProductController(SellSavvyIdentityContext context, IValidator<ProductPostModel> validator)
         {
             _context = context;
+            _validator = validator;
         }
 
         [HttpGet]
         public IActionResult GetAllProducts()
         {
+
             List<Product> products = _context.Products.ToList();
             return Ok(products);
         }
@@ -36,24 +45,47 @@ namespace SellSavvy.API.Controllers
             return Ok(product);
         }
 
-        [HttpPost]
-        public IActionResult AddProduct([FromBody] Product newProduct)
+        [HttpPost("AddProduct")]
+        public async Task<IActionResult> AddProduct([FromBody] ProductPostModel newProduct)
         {
+
+            var result =  _validator.Validate(newProduct);
+
+
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(result.Errors);
             }
+            Product product = new Product()
+            {
 
-            _context.Products.Add(newProduct);
+                Id = Guid.NewGuid(),
+                    Name = newProduct.Name,
+                    Image = newProduct.Image,
+                    Description = newProduct.Description,
+                    Price = newProduct.Price,
+                    ProductState = newProduct.ProductState,
+                    SellerId = newProduct.SellerId
+                
+        };
+            _context.Products.Add(product);
             _context.SaveChanges();
 
-            return CreatedAtRoute("GetProductById", new { id = newProduct.Id }, newProduct);
+            return CreatedAtRoute("GetProductById", new { id = product.Id }, newProduct);
         }
 
-        [HttpPut]
-        public IActionResult UpdateProduct([FromBody] Product updatedProduct)
+        [HttpPut("UpdateProduct")]
+        public async Task<IActionResult> UpdateProduct([FromBody] ProductPostModel updatedProduct)
         {
-            Product existingProduct = _context.Products.FirstOrDefault(p => p.Id == updatedProduct.Id);
+            
+            var result =  _validator.Validate(updatedProduct);
+         
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(result.Errors);
+            }
+           Product existingProduct = _context.Products.FirstOrDefault(p => p.Id == updatedProduct.Id);
+
             if (existingProduct == null)
             {
                 return NotFound();
@@ -72,7 +104,7 @@ namespace SellSavvy.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteProduct(Guid id)
+        public async Task<IActionResult> DeleteProduct(Guid id)
         {
             Product deletingProduct = _context.Products.FirstOrDefault(p => p.Id == id);
             if (deletingProduct == null)

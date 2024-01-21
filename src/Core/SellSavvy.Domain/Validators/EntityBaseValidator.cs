@@ -14,10 +14,10 @@ namespace SellSavvy.Domain.Validators
             RuleFor(c => c.CreatedByUserId).Null();
             RuleFor(c => c.CreatedOn).Null();
             RuleFor(c => c.ModifiedByUserId).Null();
-            RuleFor(c => c.LastModifiedOn).Null();
+            RuleFor(c => c.LastModifiedOn).Null().GreaterThanOrEqualTo(DateTime.Now).WithMessage("Last is last.");
             RuleFor(c => c.IsDeleted).Null();
             RuleFor(c => c.DeletedByUserId).Null();
-            RuleFor(c => c.DeletedOn);
+            RuleFor(c => c.DeletedOn).GreaterThanOrEqualTo(DateTime.Now).WithMessage("You cant delete pass!");
         }
 	}
 }

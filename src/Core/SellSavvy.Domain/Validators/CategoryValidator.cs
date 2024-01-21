@@ -8,9 +8,9 @@ namespace SellSavvy.Domain.Validators
 	{
 		public CategoryValidator()
 		{
-			RuleFor(x => x.Name).NotNull().MaximumLength(255);
-		}
+            RuleFor(x => x.Name).NotNull().MaximumLength(255).WithMessage("Please At least write name");
+        }
 
-	}
+    }
 }
 
