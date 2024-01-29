@@ -8,6 +8,7 @@ using SellSavvy.API.Models.PostModels;
 using SellSavvy.API.Service;
 
 using SellSavvy.Domain.Identity;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace SellSavvy.API.Controller
 {

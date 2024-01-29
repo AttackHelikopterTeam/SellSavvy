@@ -15,6 +15,7 @@ using FluentValidation;
 using SellSavvy.Domain.Identity;
 using System.ComponentModel.DataAnnotations;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace SellSavvy.API.Controllers
 {
@@ -32,6 +33,7 @@ namespace SellSavvy.API.Controllers
 
 
         [HttpGet("All")]
+        [OutputCache]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<CategoryPostModel>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -23,6 +23,15 @@ builder.Services.AddDbContext<SellSavvyIdentityContext>(options =>
     //"Server=91.151.83.102;Port=5432;Database=Anil_Akpinar_Test1.3;User,Id=ahmetkokteam;Password=obXRMG*U6rJ4R0cbHszpgEuFd"
 });
 
+builder.Services.AddOutputCache(options =>
+{
+    options.AddBasePolicy(builder =>
+    {
+        builder.Expire(TimeSpan.FromSeconds(10));
+    });
+});
+
+
 builder.Services.AddIdentity<Person,Role>(options =>
 {
     options.Password.RequiredLength = 3;
@@ -89,7 +98,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseOutputCache();
 
 app.MapControllers();
 

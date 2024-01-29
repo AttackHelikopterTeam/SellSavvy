@@ -7,6 +7,7 @@ using SellSavvy.Persistence.Contexts;
 using System;
 using FluentValidation;
 using SellSavvy.Application.Models.PostModels;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace SellSavvy.API.Controllers
 {
@@ -24,6 +25,7 @@ namespace SellSavvy.API.Controllers
         }
 
         [HttpGet]
+        [OutputCache]
         public IActionResult GetAllProducts()
         {
 
