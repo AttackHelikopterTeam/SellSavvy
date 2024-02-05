@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SellSavvy.Domain.Common;
 using SellSavvy.Domain.Entities;
 using SellSavvy.Domain.Identity;
 using SellSavvy.Persistence.Configurations.Entities;
@@ -28,7 +29,24 @@ namespace SellSavvy.Persistence.Contexts
         {
 
         }
+        public override int SaveChanges()
+        {
+            var entries = ChangeTracker.Entries();
+            foreach (var entry in entries)
+            {
+                if (entry.State == EntityState.Modified)
+                {
+                    ((ICreatedByEntity)entry.Entity).CreatedOn = DateTime.UtcNow;
+                }
+                if (entry.State == EntityState.Modified)
+                {
+                    ((IModifiedByEntity)entry.Entity).LastModifiedOn = DateTime.UtcNow;
+                }
+            }
 
+
+            return base.SaveChanges();
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
