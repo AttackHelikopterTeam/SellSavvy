@@ -1,5 +1,5 @@
 # SellSavvy
-
+### Presentation: https://www.canva.com/design/DAF6hOMPs4s/wuE6-RmotmAte3MrnIKLIg/edit?utm_content=DAF6hOMPs4s&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 ## Project Description
 This project is an API developed using Clean Architecture, incorporating various best practices and design patterns. It focuses on features like Identity Mechanism, JWT Token-based Authentication, CQRS Pattern with MediatR, Fluent Validation, Interception Mechanism, Entity Framework Core with Performance Optimization, Caching, and more.
 
